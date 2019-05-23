@@ -28,6 +28,23 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `firstName`, `lastName`, `username`, `email`, `department`, `title`, `phone`, `addDate`, `addUser`) VALUES
 (1, 'William', 'Wheaton', 'usa.wwheaton', 'usa.wwheaton@gmail.com', 'Engineering', 'Ensign', '7577771212', NOW(), 'admin');
 
+CREATE TABLE `movies` (
+    `movieId` int(11) NOT NULL,
+    `movieName` varchar(100) NOT NULL,
+    `genre` varchar(20) NOT NULL,
+    `rating` int(100),
+    `comments` text(),
+    `instock` int(5),
+    `price` int(6),
+    `addDate` datetime(),
+    `addUser` varchar(30) NOT NULL,
+    `editDate` datetime(),
+    `editUser` varchar(30)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `movies` (`movieId`, `movieName`, `genre`, `rating`, `comments`, `instock`, `price`, `addDate`, `addUser`, `editDate`,`editUser`) VALUES (1,'LORD OF THE RINGS','FANTASY', 5,'AN EPIC FILM.',10,20.00,NOW(),'admin',NOW(),'admin');
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
