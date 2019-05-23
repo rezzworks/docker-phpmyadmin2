@@ -19,9 +19,9 @@ CREATE TABLE `users` (
   `department` varchar(50) NOT NULL,
   `title` varchar(30),
   `phone` varchar(30),
-  `addDate` datetime(),
+  `addDate` datetime,
   `addUser` varchar(30) NOT NULL,
-  `lastLogin` datetime()
+  `lastLogin` datetime
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -33,12 +33,12 @@ CREATE TABLE `movies` (
     `movieName` varchar(100) NOT NULL,
     `genre` varchar(20) NOT NULL,
     `rating` int(100),
-    `comments` text(),
+    `comments` text,
     `instock` int(5),
     `price` int(6),
-    `addDate` datetime(),
+    `addDate` datetime,
     `addUser` varchar(30) NOT NULL,
-    `editDate` datetime(),
+    `editDate` datetime,
     `editUser` varchar(30)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
