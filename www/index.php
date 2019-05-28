@@ -2,7 +2,7 @@
 
 <html>
  <head>
-  <title>Docker with PHP & MySQL</title>
+  <title>Docker - Movie List</title>
   <meta charset="utf-8" /> 
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-    <?php echo "<h1>Docker with PHP & MySQL</h1>"; ?>
+    <?php echo "<h1>Docker - Movie List</h1>"; ?>
     <hr />
     <div class="box-body">
         <table id="example1" class="table table-bordered table-hover table-condensed">
@@ -18,8 +18,12 @@
         <tr>
             <th style="width:25px;"></th>
             <th style="width:50px;">ID</th>
-            <th>FIRST NAME</th>
-            <th>LAST NAME</th>
+            <th>TITLE</th>
+            <th>GENRE</th>
+            <th>RATING</th>
+            <th>COMMENTS</th>
+            <th>INSTOCK</th>
+            <th>PRICE</th>
         </tr>
         </thead>
         <tbody>
@@ -38,12 +42,12 @@
     </div>
 
 
-    <!-- addNewModal -->
-    <div class="modal fade" id="addNewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- addMovieModal -->
+    <div class="modal fade" id="addMovieModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add New Name</h5>
+            <!--<h5 class="modal-title" id="exampleModalLabel">Add Movie</h5>-->
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -51,13 +55,53 @@
         <div class="modal-body">
             <form role="form" id="addNameForm">
             <div class="row">
-                <div class="col-lg-6">
-                    <label>Add First Name</label>
-                    <input type="text" class="form-control" id="addFirstName" placeholder="Enter First Name" />
+                <div class="col-lg-12">
+                    <label>Add Movie Title</label>
+                    <input type="text" class="form-control" id="addTitle" placeholder="Enter Movie Title" />
                 </div>
                 <div class="col-lg-6">
-                    <label>Add Last Name</label>
-                    <input type="text" class="form-control" id="addLastName" placeholder="Enter Last Name" />
+                    <label>Add Genre</label>
+                    <select class="form-control" id="addGenre">
+                        <option></option>
+                        <option value="ACTION">ACTION</option>
+                        <option value="ADVENTURE">ADVENTURE</option>
+                        <option value="COMEDY">COMEDY</option>
+                        <option value="DRAMA">DRAMA</option>
+                        <option value="DOCUMENTARY">DOCUMENTARY</option>
+                        <option value="FANTASY">FANTASY</option>
+                        <option value="HORROR">HORROR</option>
+                        <option value="MYSTERY">MYSTERY</option>
+                        <option value="ROMANCE">ROMANCE</option>
+                        <option value="THRILLER">THRILLER</option>
+                        <option value="SCI-FI">SCI-FI</option>                 
+                    </select>
+                </div>
+                <div class="col-lg-6">
+                    <label>Add Rating</label>
+                    <select class="form-control" id="addRating">
+                        <option></option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <labeL>Add InStock</label>
+                    <input type="text" class="form-control" id="addInStock" placeholder="Enter Total In Stock" />
+                </div>
+                <div class="col-lg-6">
+                    <label>Add Price</label>
+                    <input type="text" class="form-control" id="addPrice" placeholder="Enter Price" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <label>Add Comments</label>
+                    <textarea class="form-control" id="addComments" cols="6" rows="3"></textarea>
                 </div>
             </div>
             </form>
