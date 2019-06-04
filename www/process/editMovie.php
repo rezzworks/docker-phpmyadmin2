@@ -27,19 +27,22 @@
         }
 
         try{
-            $sql = $conn->prepare("INSERT INTO movies (`movieId`, `movieName`, `genre`, `rating`, `comments`, `instock`, `price`, `addDate`, `addUser`) VALUES (?,?,?,?,?,?,?,?,?)");
-            $sql->bindParam(1, $newId);
-            $sql->bindParam(2, $addTitle);
-            $sql->bindParam(3, $addGenre);
-            $sql->bindParam(4, $addRating);
-            $sql->bindParam(5, $addComments);
-            $sql->bindParam(6, $addInStock);
-            $sql->bindParam(7, $addPrice);
-            $sql->bindParam(8, $addDate);
-            $sql->bindParam(9, $addUser);
-            $sql->execute();
-
-            echo "Success";
+            $sql = $conn->prepare("INSERT INTO movies (`movieId`, `movieName`, `genre`, `rating`, `comments`, `instock`, `price`, `addDate`, `addUser`) VALUES (:aid,:aname,:agenre,:arating,:acomments,:ainstock,:aprice,:adate,:auser)");
+            
+            $sql->bindParam(':aid', $newId);
+            $sql->bindParam(':aname', $addTitle);
+            $sql->bindParam(':agenre', $addGenre);
+            $sql->bindParam(':arating', $addRating);
+            $sql->bindParam(':acomments', $addComments);
+            $sql->bindParam(':ainstock', $addInStock);
+            $sql->bindParam(':aprice', $addPrice);
+            $sql->bindParam(':adate', $addDate);
+            $sql->bindParam(':auser', $addUser);
+            
+            if($sql->execute())
+            {
+                echo "Success";
+            }
         }
         catch(Exception $e){
             echo "Insert Error: " . $e->getMessage() . "\n";

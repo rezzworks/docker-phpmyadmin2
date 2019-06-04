@@ -1,5 +1,23 @@
 displayRecords();
 
+class MovieDatabase {
+    addMovie(movie) {
+        $.post('process/editMovie.php', {addcriteria:movie}, function(data)
+        {
+            if(data.indexOf('Error') > 1)
+            {
+                console.log('Error: ' + data);
+            }
+            else
+            {
+                $('#addMovieModal').modal('hide');
+                displayRecords();
+            }
+        });
+    }
+    
+}
+
 function displayRecords()
 {
     $.ajax({
@@ -58,7 +76,9 @@ $('#addNew').on('click', function()
 
 $('#addNewSubmit').on('click', function(e)
 {
-    var addcriteria = {
+    var mdb = new MovieDatabase();
+
+    var movie = {
         addTitle: $('#addTitle').val(),
         addGenre: $('#addGenre').val(),
         addRating: $('#addRating').val(),
@@ -67,16 +87,6 @@ $('#addNewSubmit').on('click', function(e)
         addComments: $('#addComments').val()
     }
 
-    $.post('process/editMovie.php', {addcriteria:addcriteria}, function(data)
-    {
-        if(data.indexOf('Error') > 1)
-        {
-            console.log('Error: ' + data);
-        }
-        else
-        {
-            $('#addMovieModal').modal('hide');
-            displayRecords();
-        }
-    });
+    mdb.addMovie(movie);
 });
+
