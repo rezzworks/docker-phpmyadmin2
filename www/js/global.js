@@ -1,7 +1,9 @@
 displayRecords();
 
-class MovieDatabase {
-    addMovie(movie) {
+class MovieDatabase 
+{
+    addMovie(movie) 
+    {
         $.post('process/editMovie.php', {addcriteria:movie}, function(data)
         {
             if(data.indexOf('Error') > 1)
@@ -15,7 +17,22 @@ class MovieDatabase {
             }
         });
     }
-    
+
+    editMovie(movie)
+    {
+        $.post('process/editMovie.php', {editcriteria:movie}, function(data)
+        {
+            if(data.indexOf('Update Error') > 1)
+            {
+                console.log('Error: ' + data);
+            }
+            else
+            {
+                $('#editModal').modal('hide');
+                displayRecords();
+            }
+        });  
+    }
 }
 
 function displayRecords()
@@ -74,7 +91,7 @@ $('#addNew').on('click', function()
     $('#addMovieModal').modal('show');
 });
 
-$('#addNewSubmit').on('click', function(e)
+$('#addNewSubmit').on('click', function()
 {
     var mdb = new MovieDatabase();
 
@@ -88,5 +105,46 @@ $('#addNewSubmit').on('click', function(e)
     }
 
     mdb.addMovie(movie);
+});
+
+$('#example1').on('click', 'tr > td > a#editLink', function(e)
+{
+    e.preventDefault();
+    var $dataTable = $('#example1').DataTable();
+    var tr = $(this).closest('tr');
+    var data = $dataTable.rows().data();
+    var rowData = data[tr.index()];
+
+    var editId = rowData.movieId;
+    var editName = rowData.movieName;
+    var editGenre = rowData.genre;
+    var editRating = rowData.rating;
+    var editInstock = rowData.instock;
+    var editPrice = rowData.price;
+
+    $('#editId').val(editId);
+    $('#editName').val(editName);
+    $('#editGenre').val(editGenre);
+    $('#editRating').val(editRating);
+    $('#editInstock').val(editInstock);
+    $('#editPrice').val(editPrice);
+    
+    $('#editModal').modal('show');
+});
+
+$('#editSubmit').on('click', function()
+{
+    var mdb = new MovieDatabase();
+
+    var movie = {
+        editId: $('#editId').val(),
+        editName: $('#editName').val(),
+        editGenre: $('#editGenre').val(),
+        editRating: $('#editRating').val(),
+        editInstock: $('#editInstock').val(),
+        editPrice: $('#editPrice').val()
+    }
+
+    mdb.editMovie(movie);
 });
 

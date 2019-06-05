@@ -1,45 +1,45 @@
 <!-- put in ./www directory -->
 
 <html>
- <head>
-  <title>Docker - Movie List</title>
-  <meta charset="utf-8" /> 
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
+<head>
+    <title>Docker - Movie List</title>
+    <meta charset="utf-8" /> 
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
 </head>
 <body>
-    <div class="container">
-    <?php echo "<h1>Docker - Movie List</h1>"; ?>
+<div class="container">
+    <h1>Docker - Movie Catalogue</h1>
     <hr />
     <div class="box-body">
-        <table id="example1" class="table table-bordered table-hover table-condensed">
-        <thead>
-        <tr>
-            <th style="width:25px;"></th>
-            <th style="width:50px;">ID</th>
-            <th>TITLE</th>
-            <th>GENRE</th>
-            <th>RATING</th>
-            <th>COMMENTS</th>
-            <th>INSTOCK</th>
-            <th>PRICE</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-        </table>
-    </div>
-
-    <hr />
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-            <button type="button" class="btn btn-primary btn-flat" id="addNew">Add New</button>
+        <div class="box-header" style="margin-bottom: 10px;">
+            <div class="row">
+                <div class="col-lg-3">
+                <button type="button" class="btn btn-primary btn-flat btn-xs" id="addNew">Add New</button>
+                </div>
             </div>
         </div>
+        <table id="example1" class="table table-bordered table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th style="width:25px;"></th>
+                    <th style="width:50px;">ID</th>
+                    <th>TITLE</th>
+                    <th>GENRE</th>
+                    <th>RATING</th>
+                    <th>COMMENTS</th>
+                    <th>INSTOCK</th>
+                    <th>PRICE</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
+</div>
+
+
 
 
     <!-- addMovieModal -->
@@ -119,29 +119,63 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Edit Movie</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
-            <form role="form" id="editUserForm">
+            <form role="form" id="editNameForm">
             <div class="row">
-                <div class="col-lg-6">
-                    <label>Edit First Name</label><span class="text-error" id="editFNameError" style="display:none; color:red;"> * field cannot be blank</span>
-                    <input type="text" class="form-control" id="editFirstName" placeholder="Enter First Name" />
-                    <input type="hidden" id="editUID" />
+                <div class="col-lg-12">
+                    <label>Edit Movie Title</label>
+                    <input type="text" class="form-control" id="editName" placeholder="Enter Movie Title" />
+                    <input type="hidden" id="editId" />
                 </div>
                 <div class="col-lg-6">
-                    <labeL>Edit Last Name</label><span class="text-error" id="editLNameError" style="display:none; color:red;"> * field cannot be blank</span>
-                    <input type="text" class="form-control" id="editLastName" placeholder="Enter Last Name" />
+                    <label>Edit Genre</label>
+                    <select class="form-control" id="editGenre">
+                        <option></option>
+                        <option value="ACTION">ACTION</option>
+                        <option value="ADVENTURE">ADVENTURE</option>
+                        <option value="COMEDY">COMEDY</option>
+                        <option value="DRAMA">DRAMA</option>
+                        <option value="DOCUMENTARY">DOCUMENTARY</option>
+                        <option value="FANTASY">FANTASY</option>
+                        <option value="HORROR">HORROR</option>
+                        <option value="MYSTERY">MYSTERY</option>
+                        <option value="ROMANCE">ROMANCE</option>
+                        <option value="THRILLER">THRILLER</option>
+                        <option value="SCI-FI">SCI-FI</option>                 
+                    </select>
+                </div>
+                <div class="col-lg-6">
+                    <label>Edit Rating</label>
+                    <select class="form-control" id="editRating">
+                        <option></option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <labeL>Edit InStock</label>
+                    <input type="text" class="form-control" id="editInstock" placeholder="Enter Total In Stock" />
+                </div>
+                <div class="col-lg-6">
+                    <label>Edit Price</label>
+                    <input type="text" class="form-control" id="editPrice" placeholder="Enter Price" />
                 </div>
             </div>
             </form>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="editUserSubmit">Save changes</button>
+            <button type="button" class="btn btn-primary" id="editSubmit">Save changes</button>
         </div>
         </div>
     </div>
