@@ -87,4 +87,34 @@
         }
         $conn=null;
     }
+
+    if(isset($_POST['deletecriteria']))
+    {
+        $value = $_POST['deletecriteria'];
+
+        $deleteName = $value['deleteName'];
+        $deleteId = $value['deleteId'];
+        $deleteGenre = $value['deleteGenre'];
+        $deleteRating = $value['deleteRating'];
+        $editInstock = $value['deleteInstock'];
+        $deletePrice = $value['deletePrice'];
+        $deleteDate = date("Y-m-d H:i:s");
+        $deleteUser = 'usa.jbeasley'; 
+
+        try{
+            $sql = $conn->prepare("DELETE FROM movies WHERE movieId = :did");
+
+            $sql->bindParam(':did', $deleteId);
+
+            if($sql->execute())
+            {
+                echo "Success";
+            }
+        }
+        catch(Exception $e){
+            echo "Delete Error: " . $e->getMessage() . "\n";
+            exit;
+        }
+        $conn=null;       
+    }
 ?> 

@@ -33,6 +33,22 @@ class MovieDatabase
             }
         });  
     }
+
+    deleteMovie(movie)
+    {
+        $.post('process/editMovie.php', {deletecriteria:movie}, function(data)
+        {
+            if(data.indexOf('Delete Error') > 1)
+            {
+                console.log('Error: ' + data);
+            }
+            else
+            {
+                $('#deleteModal').modal('hide');
+                displayRecords();
+            }
+        });
+    }
 }
 
 function displayRecords()
@@ -53,7 +69,7 @@ function displayRecords()
                         "data": "",
                         "fnCreatedCell": function (nTd, sData, oData, iRow, iCol)
                         {
-                            $(nTd).html("<a href='#' id='editLink'><i class='fas fa-edit'></i></a>  <a href='#' id='delLink'><i class='fas fa-times'></i></a>");
+                            $(nTd).html("<a href='#' id='editLink'><i class='fas fa-edit'></i></a>  <a href='#' id='deleteLink'><i class='fas fa-times'></i></a>");
                         }
                     },
                     {"data": "movieId"},
@@ -146,5 +162,46 @@ $('#editSubmit').on('click', function()
     }
 
     mdb.editMovie(movie);
+});
+
+$('#example1').on('click', 'tr > td > a#deleteLink', function(e)
+{
+    e.preventDefault();
+    var $dataTable = $('#example1').DataTable();
+    var tr = $(this).closest('tr');
+    var data = $dataTable.rows().data();
+    var rowData = data[tr.index()];
+
+    var deleteId = rowData.movieId;
+    var deleteName = rowData.movieName;
+    var deleteGenre = rowData.genre;
+    var deleteRating = rowData.rating;
+    var deleteInstock = rowData.instock;
+    var deletePrice = rowData.price;
+
+    $('#deleteId').val(deleteId);
+    $('#deleteName').val(deleteName);
+    $('#deleteGenre').val(deleteGenre);
+    $('#deleteRating').val(deleteRating);
+    $('#deleteInstock').val(deleteInstock);
+    $('#deletePrice').val(deletePrice);
+    
+    $('#deleteModal').modal('show');
+});
+
+$('#deleteSubmit').on('click', function()
+{
+    var mdb = new MovieDatabase();
+
+    var movie = {
+        deleteId: $('#deleteId').val(),
+        deleteName: $('#deleteName').val(),
+        deleteGenre: $('#deleteGenre').val(),
+        deleteRating: $('#deleteRating').val(),
+        deleteInstock: $('#deleteInstock').val(),
+        deletePrice: $('#deletePrice').val()
+    }
+
+    mdb.deleteMovie(movie);
 });
 

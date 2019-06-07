@@ -116,98 +116,116 @@
 
     <!-- editModal -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit Movie</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form role="form" id="editNameForm">
-            <div class="row">
-                <div class="col-lg-12">
-                    <label>Edit Movie Title</label>
-                    <input type="text" class="form-control" id="editName" placeholder="Enter Movie Title" />
-                    <input type="hidden" id="editId" />
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Movie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="col-lg-6">
-                    <label>Edit Genre</label>
-                    <select class="form-control" id="editGenre">
-                        <option></option>
-                        <option value="ACTION">ACTION</option>
-                        <option value="ADVENTURE">ADVENTURE</option>
-                        <option value="COMEDY">COMEDY</option>
-                        <option value="DRAMA">DRAMA</option>
-                        <option value="DOCUMENTARY">DOCUMENTARY</option>
-                        <option value="FANTASY">FANTASY</option>
-                        <option value="HORROR">HORROR</option>
-                        <option value="MYSTERY">MYSTERY</option>
-                        <option value="ROMANCE">ROMANCE</option>
-                        <option value="THRILLER">THRILLER</option>
-                        <option value="SCI-FI">SCI-FI</option>                 
-                    </select>
+                <div class="modal-body">
+                    <form role="form" id="editNameForm">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label>Edit Movie Title</label>
+                            <input type="text" class="form-control" id="editName" placeholder="Enter Movie Title" />
+                            <input type="hidden" id="editId" />
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Edit Genre</label>
+                            <select class="form-control" id="editGenre">
+                                <option></option>
+                                <option value="ACTION">ACTION</option>
+                                <option value="ADVENTURE">ADVENTURE</option>
+                                <option value="COMEDY">COMEDY</option>
+                                <option value="DRAMA">DRAMA</option>
+                                <option value="DOCUMENTARY">DOCUMENTARY</option>
+                                <option value="FANTASY">FANTASY</option>
+                                <option value="HORROR">HORROR</option>
+                                <option value="MYSTERY">MYSTERY</option>
+                                <option value="ROMANCE">ROMANCE</option>
+                                <option value="THRILLER">THRILLER</option>
+                                <option value="SCI-FI">SCI-FI</option>                 
+                            </select>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Edit Rating</label>
+                            <select class="form-control" id="editRating">
+                                <option></option>
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <labeL>Edit InStock</label>
+                            <input type="text" class="form-control" id="editInstock" placeholder="Enter Total In Stock" />
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Edit Price</label>
+                            <input type="text" class="form-control" id="editPrice" placeholder="Enter Price" />
+                        </div>
+                    </div>
+                    </form>
                 </div>
-                <div class="col-lg-6">
-                    <label>Edit Rating</label>
-                    <select class="form-control" id="editRating">
-                        <option></option>
-                        <option value="5">5</option>
-                        <option value="4">4</option>
-                        <option value="3">3</option>
-                        <option value="2">2</option>
-                        <option value="1">1</option>
-                    </select>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editSubmit">Save changes</button>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <labeL>Edit InStock</label>
-                    <input type="text" class="form-control" id="editInstock" placeholder="Enter Total In Stock" />
-                </div>
-                <div class="col-lg-6">
-                    <label>Edit Price</label>
-                    <input type="text" class="form-control" id="editPrice" placeholder="Enter Price" />
-                </div>
-            </div>
-            </form>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="editSubmit">Save changes</button>
-        </div>
-        </div>
-    </div>
     </div>
 
-    <!-- delModal -->
-    <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form role="form" id="delUserForm">
-            <div class="row">
-                <div class="col-lg-6">
-                    <label>Delete User</label>
-                    <input type="text" class="form-control" id="delFirstName" readonly />
-                    <input type="hidden" id="delUID" />
+    <!-- deleteModal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Movie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form role="form" id="deleteNameForm">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label>Movie Title</label>
+                            <input type="text" class="form-control" id="deleteName" readonly placeholder="Enter Movie Title" />
+                            <input type="hidden" id="deleteId" />
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Genre</label>
+                            <input type="text" class="form-control" id="deleteGenre" readonly />
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Rating</label>
+                            <input type="text" class="form-control" id="deleteRating" readonly />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <labeL>InStock</label>
+                            <input type="text" class="form-control" id="deleteInstock" readonly placeholder="Enter Total In Stock" />
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Price</label>
+                            <input type="text" class="form-control" id="deletePrice" readonly placeholder="Enter Price" />
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="deleteSubmit">Delete</button>
                 </div>
             </div>
-            </form>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="delUserSubmit">Delete</button>
-        </div>
-        </div>
-    </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
