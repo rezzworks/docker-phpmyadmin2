@@ -205,3 +205,7 @@ $('#deleteSubmit').on('click', function()
     mdb.deleteMovie(movie);
 });
 
+
+
+
+
