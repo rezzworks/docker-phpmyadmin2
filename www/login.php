@@ -53,14 +53,14 @@
           <form action="">
             <fieldset>
                 <div class="col-lg-12" style="margin-top:20px;">
-                    <input type="text" class="form-control" placeholder="Username" />
-                </div>
+                    <input type="text" id="user" class="form-control" placeholder="Username" />
+                </div> 
                 <div class="col-lg-12" style="margin-top:20px;">
-                    <input type="password" class="form-control" placeholder="Password" /> 
+                    <input type="password" id="pass" class="form-control" placeholder="Password" /> 
                 </div>
                 <div class="col-lg-12">
                     <hr />
-                    <button class="btn-primary btn btn-flat" style="width:100%;" type="submit">Sign in</button>
+                    <button class="btn-primary btn btn-flat" id="loginSubmit" style="width:100%;" type="button">Sign in</button>
                 </div>
             </fieldset>
           </form>

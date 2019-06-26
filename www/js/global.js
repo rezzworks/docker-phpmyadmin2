@@ -51,6 +51,25 @@ class MovieDatabase
     }
 }
 
+class LoginCheck 
+{
+    checkLogin(logincriteria)
+    {
+        if(logincriteria.user == "" || logincriteria.pass == "")
+        {
+            console.log('error');
+            return false;
+        }
+        else
+        {
+            $.post('process/checkLogin.php', {logincriteria:logincriteria}, function(data)
+            {
+                console.log(data);
+            });
+        }
+    }
+}
+
 function displayRecords()
 {
     $.ajax({
@@ -205,7 +224,17 @@ $('#deleteSubmit').on('click', function()
     mdb.deleteMovie(movie);
 });
 
+$('#loginSubmit').on('click', function()
+{
+    var lgc = new LoginCheck();
 
+    var logincriteria = {
+        user: $('#user').val(),
+        pass: $('#pass').val()
+    }
+
+    lgc.checkLogin(logincriteria);
+});
 
 
 
