@@ -57,14 +57,21 @@ class LoginCheck
     {
         if(logincriteria.user == "" || logincriteria.pass == "")
         {
-            console.log('error');
-            return false;
+            console.log('Enter username and password');
+            return false; 
         }
         else
         {
             $.post('process/checkLogin.php', {logincriteria:logincriteria}, function(data)
             {
-                console.log(data);
+                if(data.indexOf('Error') >= 0)
+                {
+                    console.log(data);
+                }
+                else
+                {
+                    window.location.href = "moviecatalog.php";
+                }
             });
         }
     }
@@ -102,7 +109,7 @@ function displayRecords()
                 "iDisplayLength": 25,
                 "order": [[ 1, "desc" ]],
                 "paging": true,
-                "scrollY": 550,
+                "scrollY": 400,
                 /*"scrollX": true,*/
                 "bDestroy": true,
                 "stateSave": true,
@@ -234,6 +241,11 @@ $('#loginSubmit').on('click', function()
     }
 
     lgc.checkLogin(logincriteria);
+});
+
+$('#signoutLink').on('click', function()
+{
+    window.location.href = "index.php";
 });
 
 
