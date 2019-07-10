@@ -1,5 +1,5 @@
 <?php
-    include("../include/database.php");
+    include("../include/sessions.php");
 
     if(isset($_POST['addcriteria']))
     {
