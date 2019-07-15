@@ -17,6 +17,7 @@ CREATE TABLE `users` (
   `username` varchar(20) NOT NULL,
   `password` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `userlevel` varchar(1) NOT NULL,
   `department` varchar(50) NOT NULL,
   `title` varchar(30),
   `phone` varchar(30),
@@ -26,8 +27,8 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-INSERT INTO `users` (`id`, `firstName`, `lastName`, `username`, `password`, `email`, `department`, `title`, `phone`, `addDate`, `addUser`) VALUES
-(1, 'William', 'Wheaton', 'usa.wwheaton', 'password', 'usa.wwheaton@gmail.com', 'Engineering', 'Ensign', '7577771212', NOW(), 'admin');
+INSERT INTO `users` (`id`, `firstName`, `lastName`, `username`, `password`, `email`, `userlevel`, `department`, `title`, `phone`, `addDate`, `addUser`) VALUES
+(1, 'William', 'Wheaton', 'usa.wwheaton', 'password', 'usa.wwheaton@gmail.com', '9', 'Engineering', 'Ensign', '7577771212', NOW(), 'admin');
 
 CREATE TABLE `movies` (
     `movieId` int(11) NOT NULL,

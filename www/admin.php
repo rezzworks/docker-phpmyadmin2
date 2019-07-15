@@ -1,5 +1,6 @@
 <?php
     include("include/sessions.php"); 
+    if($sesslevel != '9'){header("location:javascript://history.go(-1)");}
     if($sessusername == ""){header("location:logout.php");}
 ?>
 <html>
@@ -16,33 +17,32 @@
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Docker-Compose</a>
-        </div>
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Docker-Compose</a>
+            </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome, <?php echo $sessfirstname . ' ' . $sesslastname; ?> <span class="caret"></span></a>
-                <input type="hidden" id="hiddenLevel" value="<?php echo $sesslevel; ?>" />
-                <ul class="dropdown-menu">
-                    <li><a href="#" id="adminLink">Admin</a></li>
-                    <li><a href="#" id="signoutLink">Logout</a></li>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                <li><a href="moviecatalog.php">Home</a></li>
                 </ul>
-            </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
+                <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome, <?php echo $sessfirstname . ' ' . $sesslastname; ?> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="admin.php">Admin</a></li>
+                        <li><a href="#" id="signoutLink">Logout</a></li>
+                    </ul>
+                </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
     <div class="container">
@@ -52,21 +52,26 @@
             <div class="box-header" style="margin-bottom: 10px;">
                 <div class="row">
                     <div class="col-lg-3">
-                    <button type="button" class="btn btn-primary btn-flat btn-xs" id="addNew">Add New</button>
+                    <button type="button" class="btn btn-primary btn-flat btn-xs" id="addNewUser">Add New</button>
                     </div>
                 </div>
             </div>
-            <table id="example1" class="table table-bordered table-hover table-condensed">
+            <table id="usersDatatable" class="table table-bordered table-hover table-condensed" style="width: 1200px;">
                 <thead>
                     <tr>
                         <th style="width:25px;"></th>
                         <th style="width:50px;">ID</th>
+                        <th>FIRSTNAME</th>
+                        <th>LASTNAME</th>
+                        <th>USERNAME</th>
+                        <th>EMAIL</th>
+                        <th>LEVEL</th>
+                        <th>DEPARTMENT</th>
                         <th>TITLE</th>
-                        <th>GENRE</th>
-                        <th>RATING</th>
-                        <th>COMMENTS</th>
-                        <th>INSTOCK</th>
-                        <th>PRICE</th>
+                        <th>PHONE</th>
+                        <th style="width:150px;">ADD_DATE</th>
+                        <th>ADD_USER</th>
+                        <th style="width:150px;">LAST_LOGIN</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,77 +80,72 @@
         </div>
     </div>
 
-    <!-- addMovieModal -->
-    <div class="modal fade" id="addMovieModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <!--<h5 class="modal-title" id="exampleModalLabel">Add Movie</h5>-->
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form role="form" id="addNameForm">
-            <div class="row">
-                <div class="col-lg-12">
-                    <label>Add Movie Title</label>
-                    <input type="text" class="form-control" id="addTitle" placeholder="Enter Movie Title" />
-                </div>
-                <div class="col-lg-6">
-                    <label>Add Genre</label>
-                    <select class="form-control" id="addGenre">
-                        <option></option>
-                        <option value="ACTION">ACTION</option>
-                        <option value="ADVENTURE">ADVENTURE</option>
-                        <option value="COMEDY">COMEDY</option>
-                        <option value="DRAMA">DRAMA</option>
-                        <option value="DOCUMENTARY">DOCUMENTARY</option>
-                        <option value="FANTASY">FANTASY</option>
-                        <option value="HORROR">HORROR</option>
-                        <option value="MYSTERY">MYSTERY</option>
-                        <option value="ROMANCE">ROMANCE</option>
-                        <option value="THRILLER">THRILLER</option>
-                        <option value="SCI-FI">SCI-FI</option>                 
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    <label>Add Rating</label>
-                    <select class="form-control" id="addRating">
-                        <option></option>
-                        <option value="5">5</option>
-                        <option value="4">4</option>
-                        <option value="3">3</option>
-                        <option value="2">2</option>
-                        <option value="1">1</option>
-                    </select>
-                </div>
+    <!-- addUserModal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">Add User</h4>
             </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <labeL>Add InStock</label>
-                    <input type="text" class="form-control" id="addInStock" placeholder="Enter Total In Stock" />
+            <div class="modal-body">
+                <form role="form" id="addUserForm">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Add First Name</label>
+                        <input type="text" class="form-control" id="addFirstName" placeholder="Enter First Name" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Add Last Name</label>
+                        <input type="text" class="form-control" id="addLastName" placeholder="Enter Last Name" />
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <label>Add Price</label>
-                    <input type="text" class="form-control" id="addPrice" placeholder="Enter Price" />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Add Username</label>
+                        <input type="text" class="form-control" id="addUsername" placeholder="Enter Username" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Add Email</label>
+                        <input type="text" class="form-control" id="addEmail" placeholder="Enter Email" />
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <labeL>Add Userlevel</label>
+                        <select class="form-control" id="addUserlevel">
+                            <option value="9">9 - Admin</option>
+                            <option value="1">1 - User</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Add Department</label>
+                        <input type="text" class="form-control" id="addDept" placeholder="Enter Department" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Add Title</label>
+                        <input type="text" class="form-control" id="addTitle" placeholder="Enter Title" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Add Phone</label>
+                        <input type="text" class="form-control" id="addPhone" placeholder="Enter Phone" />
+                    </div>
+                </div>
+                </form>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <label>Add Comments</label>
-                    <textarea class="form-control" id="addComments" cols="6" rows="3"></textarea>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="addNewSubmit">Submit</button>
             </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="addNewSubmit">Save changes</button>
-        </div>
+            </div>
         </div>
     </div>
-    </div>
+    <!-- end addUserModal -->
 
     <!-- editModal -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -264,7 +264,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="js/moviecatalog.js" type="text/javascript"></script>
+    <script src="js/admin.js" type="text/javascript"></script>
     <script src="js/global.js" type="text/javascript"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
     #session_cache_limiter('nocache');
     #session_cache_expire(1);
-    //if(isset($_SESSION['user'])){session_start();}
+    if(!isset($_SESSION['user'])){session_start();}
     
     include("database.php");
 
@@ -10,8 +10,8 @@
     $sesslastname = $_SESSION['user']['lastName'];
     $sessusername = $_SESSION['user']['username'];
     $sessemail = $_SESSION['user']['email'];
+    $sesslevel = $_SESSION['user']['userlevel'];
     $sessdept = $_SESSION['user']['dept'];
     $sesstitle = $_SESSION['user']['title'];
     $sessphone = $_SESSION['user']['phone'];
-
 ?>

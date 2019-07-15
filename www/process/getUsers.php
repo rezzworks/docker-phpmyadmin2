@@ -1,7 +1,7 @@
 <?php
     include("../include/sessions.php");
 
-    $query = "SELECT '', `movieId`, `movieName`, `genre`, `rating`, `comments`, `instock`, `price` From movies";
+    $query = "SELECT '', `id`, `firstName`, `lastName`, `username`, `email`, `userlevel`, `department`, `title`, `phone`, `addDate`, `addUser`, `lastLogin` From users";
 
     if($result = $conn->query($query))
     {

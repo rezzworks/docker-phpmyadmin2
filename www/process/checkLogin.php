@@ -8,7 +8,7 @@
         $user = $value['user'];
         $pass = $value['pass'];
 
-        $sql = "SELECT `id`, `firstName`, `lastName`, `username`, `password`, `email`, `department`, `title`, `phone` FROM users WHERE `username` = :USERNAME";
+        $sql = "SELECT `id`, `firstName`, `lastName`, `username`, `password`, `email`, `userlevel`, `department`, `title`, `phone` FROM users WHERE `username` = :USERNAME";
         $sth = $conn->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
         
         $sth->bindParam(':USERNAME', $user);
@@ -18,8 +18,21 @@
         if($row['password'] == $pass)
         {
             $_SESSION['user'] = $row;
+            $dbuser = $_SESSION['user']['username'];
 
-            echo 'Success';
+            $update = "UPDATE users SET `lastLogin` = NOW() WHERE `username` = :USERNAME";
+            $upd = $conn->prepare($update, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            $upd->bindParam(':USERNAME', $dbuser);
+            $res = $upd->execute();
+
+            if($res)
+            {
+                echo "Success";               
+            }
+            else
+            {
+                echo "Error: Could not log you in.";
+            }
         }
         else
         {
