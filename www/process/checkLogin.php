@@ -15,7 +15,8 @@
         $res = $sth->execute();
         $row = $sth->fetch(PDO::FETCH_ASSOC);
 
-        if($row['password'] == $pass)
+        //if(password_verify($pass, $row['password']))
+        if($pass == $row['password'])
         {
             $_SESSION['user'] = $row;
             $dbuser = $_SESSION['user']['username'];
@@ -36,7 +37,7 @@
         }
         else
         {
-            echo "Error: Incorrect username or password";
+            echo "Error: Incorrect username or password " . $row['password'];
         }
     }
 ?>

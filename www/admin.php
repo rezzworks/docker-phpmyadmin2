@@ -59,7 +59,7 @@
             <table id="usersDatatable" class="table table-bordered table-hover table-condensed" style="width: 1200px;">
                 <thead>
                     <tr>
-                        <th style="width:25px;"></th>
+                        <th style="width:50px;"></th>
                         <th style="width:50px;">ID</th>
                         <th>FIRSTNAME</th>
                         <th>LASTNAME</th>
@@ -67,7 +67,7 @@
                         <th>EMAIL</th>
                         <th>LEVEL</th>
                         <th>DEPARTMENT</th>
-                        <th>TITLE</th>
+                        <th style="width:150px;">TITLE</th>
                         <th>PHONE</th>
                         <th style="width:150px;">ADD_DATE</th>
                         <th>ADD_USER</th>
@@ -85,7 +85,6 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -147,72 +146,103 @@
     </div>
     <!-- end addUserModal -->
 
-    <!-- editModal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- editUserModal -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Movie</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Edit User</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" id="editNameForm">
+                <form role="form" id="editUserForm">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Edit First Name</label>
+                        <input type="text" class="form-control" id="editFirstName" placeholder="Enter First Name" />
+                        <input type="hidden" id="editId" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Edit Last Name</label>
+                        <input type="text" class="form-control" id="editLastName" placeholder="Enter Last Name" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Edit Username</label>
+                        <input type="text" class="form-control" id="editUsername" placeholder="Enter Username" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Edit Email</label>
+                        <input type="text" class="form-control" id="editEmail" placeholder="Enter Email" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <labeL>Edit Userlevel</label>
+                        <select class="form-control" id="editUserlevel">
+                            <option value="9">9 - Admin</option>
+                            <option value="1">1 - User</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Edit Department</label>
+                        <input type="text" class="form-control" id="editDept" placeholder="Enter Department" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Edit Title</label>
+                        <input type="text" class="form-control" id="editTitle" placeholder="Enter Title" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Edit Phone</label>
+                        <input type="text" class="form-control" id="editPhone" placeholder="Enter Phone" />
+                    </div>
+                </div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-primary pull-left resetPassLink" id="resetPassLink">Reset Password</button> -->
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editUserSubmit">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end editUserModal -->
+
+    <!-- editPassModal -->
+    <div class="modal fade" id="editPassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Reset Password</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" id="resetPassForm">
                     <div class="row">
                         <div class="col-lg-12">
-                            <label>Edit Movie Title</label>
-                            <input type="text" class="form-control" id="editName" placeholder="Enter Movie Title" />
-                            <input type="hidden" id="editId" />
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Edit Genre</label>
-                            <select class="form-control" id="editGenre">
-                                <option></option>
-                                <option value="ACTION">ACTION</option>
-                                <option value="ADVENTURE">ADVENTURE</option>
-                                <option value="COMEDY">COMEDY</option>
-                                <option value="DRAMA">DRAMA</option>
-                                <option value="DOCUMENTARY">DOCUMENTARY</option>
-                                <option value="FANTASY">FANTASY</option>
-                                <option value="HORROR">HORROR</option>
-                                <option value="MYSTERY">MYSTERY</option>
-                                <option value="ROMANCE">ROMANCE</option>
-                                <option value="THRILLER">THRILLER</option>
-                                <option value="SCI-FI">SCI-FI</option>                 
-                            </select>
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Edit Rating</label>
-                            <select class="form-control" id="editRating">
-                                <option></option>
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                                <option value="1">1</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <labeL>Edit InStock</label>
-                            <input type="text" class="form-control" id="editInstock" placeholder="Enter Total In Stock" />
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Edit Price</label>
-                            <input type="text" class="form-control" id="editPrice" placeholder="Enter Price" />
+                            <label>Enter Reset Password</label>
+                            <input type="password" class="form-control" id="resetPass" placeholder="Enter Reset Password" />
+                            <input type="hidden" id="resetId" />
                         </div>
                     </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="editSubmit">Save changes</button>
+                    <button type="button" class="btn btn-primary" id="resetPassSubmit">Submit</button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- end editPassModal -->
 
     <!-- deleteModal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

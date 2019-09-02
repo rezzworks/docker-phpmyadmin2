@@ -11,8 +11,41 @@ class UserEdit
             else
             {
                 $('#addUserModal').modal('hide');
-                //displayUsers();
-                console.log(data);
+                displayUsers();
+                //console.log(data);
+            }
+        });
+    }
+
+    editUser(user)
+    {
+        $.post('process/editUser.php', {editcriteria:user}, function(data)
+        {
+            if(data.indexOf('Error') > 1)
+            {
+                console.log('Error: ' + data);
+            }
+            else
+            {
+                $('#editUserModal').modal('hide');
+                displayUsers();
+                //console.log(data);
+            }
+        });
+    }
+
+    resetPass(user)
+    {
+        $.post('process/editUser.php', {resetcritieria:user}, function(data)
+        {
+            if(data.indexOf('Error') > 1)
+            {
+                console.log('Error: ' + data);
+            }
+            else
+            {
+                $('#editPassModal').modal('hide');
+                displayUsers();
             }
         });
     }
@@ -38,7 +71,7 @@ function displayUsers()
                         "data": "",
                         "fnCreatedCell": function (nTd, sData, oData, iRow, iCol)
                         {
-                            $(nTd).html("<a href='#' id='editLink'><i class='fas fa-edit'></i></a>  <a href='#' id='deleteLink'><i class='fas fa-times'></i></a>");
+                            $(nTd).html("<a href='#' id='editUserLink'><i class='fas fa-edit'></i></a>  <a href='#' id='deleteLink'><i class='fas fa-times'></i></a> <a href='#' id='resetPassLink'><i class='fas fa-unlock'></i></a>");
                         }
                     },
                     {"data": "id"},
@@ -103,4 +136,112 @@ $('#addNewSubmit').on('click', function()
 
     usr.addUser(user);
 });
+
+$('#usersDatatable').on('click', 'tr > td > a#editUserLink', function(e)
+{
+    e.preventDefault();
+    var $datatable = $('#usersDatatable').DataTable();
+    var tr = $(this).closest('tr');
+    var data = $datatable.rows().data();
+    var rowData = data[tr.index()];
+
+    var editId = rowData.id;
+    var editFirstName = rowData.firstName;
+    var editLastName = rowData.lastName;
+    var editUsername = rowData.username;
+    var editEmail = rowData.email;
+    var editUserlevel = rowData.userlevel;
+    var editDept = rowData.department;
+    var editTitle = rowData.title;
+    var editPhone = rowData.phone;
+
+    $('#editId').val(editId);
+    $('#editFirstName').val(editFirstName);
+    $('#editLastName').val(editLastName);
+    $('#editUsername').val(editUsername);
+    $('#editEmail').val(editEmail);
+    $('#editUserlevel').val(editUserlevel);
+    $('#editDept').val(editDept);
+    $('#editTitle').val(editTitle);
+    $('#editPhone').val(editPhone);
+    
+    $('#editUserModal').modal('show');
+});
+
+$('#editUserSubmit').on('click', function()
+{
+    var esr = new UserEdit();
+
+    var user = {
+        editId: $('#editId').val(),
+        editFirstName: $('#editFirstName').val(),
+        editLastName: $('#editLastName').val(),
+        editUsername: $('#editUsername').val(),
+        editEmail: $('#editEmail').val(),
+        editUserlevel: $('#editUserlevel').val(),
+        editDept: $('#editDept').val(),
+        editTitle: $('#editTitle').val(),
+        editPhone: $('#editPhone').val()
+    }
+
+    esr.editUser(user);
+});
+
+$('#usersDatatable').on('click', 'tr > td > a#resetPassLink', function(e)
+{
+    e.preventDefault();
+    var $datatable = $('#usersDatatable').DataTable();
+    var tr = $(this).closest('tr');
+    var data = $datatable.rows().data();
+    var rowData = data[tr.index()];
+
+    var resetId = rowData.id;
+
+    $('#resetId').val(resetId);
+
+    $('#editPassModal').modal('show');
+
+    console.log('here');
+});
+
+$('#resetPassSubmit').on('click', function()
+{
+    var psr = new UserEdit();
+
+    var user = {
+        resetId: $('#resetId').val(),
+        resetPass: $('#resetPass').val()
+    }
+
+    psr.resetPass(user);
+});
+
+// Inactivity timeout function
+var idleTime = 0;
+$(document).ready(function()
+{
+    // Increment the idle time counter every minute
+    var idleInterval = setInterval(timerIncrement, 60000);
+
+    // Zero the idle timer on mouse movement
+    $(this).mousemove(function(e)
+    {
+        idleTime = 0;
+    });
+    // Zero the idle timer on keypress
+    $(this).keypress(function(e)
+    {
+        idleTime = 0;
+    });
+});
+
+function timerIncrement()
+{
+    idleTime = idleTime + 1;
+    console.log("time is " + idleTime);
+    if(idleTime > 19)
+    {
+        window.location.href = "logout.php";
+    }
+}
 

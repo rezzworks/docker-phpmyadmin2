@@ -205,3 +205,33 @@ $('#deleteSubmit').on('click', function()
 
     mdb.deleteMovie(movie);
 });
+
+// Inactivity timeout function
+var idleTime = 0;
+$(document).ready(function()
+{
+    // Increment the idle time counter every minute
+    var idleInterval = setInterval(timerIncrement, 60000);
+
+    // Zero the idle timer on mouse movement
+    $(this).mousemove(function(e)
+    {
+        idleTime = 0;
+    });
+    // Zero the idle timer on keypress
+    $(this).keypress(function(e)
+    {
+        idleTime = 0;
+    });
+});
+
+function timerIncrement()
+{
+    idleTime = idleTime + 1;
+    console.log("time is " + idleTime);
+    if(idleTime > 19)
+    {
+        window.location.href = "logout.php";
+    }
+}
+
